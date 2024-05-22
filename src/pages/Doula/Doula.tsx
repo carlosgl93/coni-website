@@ -3,15 +3,15 @@ import Typography from '@mui/material/Typography';
 import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 
-function Page2() {
+function Doula() {
   return (
     <>
-      <Meta title="page 2" />
+      <Meta title="Doula - Birth Keeper" />
       <FullSizeCenteredFlexBox>
-        <Typography variant="h3">Page 2</Typography>
+        <Typography variant="h3">Doula1</Typography>
       </FullSizeCenteredFlexBox>
     </>
   );
 }
 
-export default Page2;
+export default Doula;

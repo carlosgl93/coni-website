@@ -7,13 +7,24 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
-
+import routes from '@/routes';
 import { FlexBox } from '@/components/styled';
 import { title } from '@/config';
 import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
+import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import useOrientation from '@/hooks/useOrientation';
 
 function Header() {
+  const isPortrait = useOrientation();
+
+  return isPortrait ? <MobileHeader /> : <DesktopHeader />;
+}
+
+export default Header;
+
+const MobileHeader = () => {
   const [, sidebarActions] = useSidebar();
   const [theme] = useTheme();
 
@@ -52,6 +63,58 @@ function Header() {
       </AppBar>
     </Box>
   );
-}
+};
 
-export default Header;
+const DesktopHeader = () => {
+  const [, sidebarActions] = useSidebar();
+  const [theme] = useTheme();
+
+  return (
+    <Box sx={{ flexGrow: 1 }} data-pw={`theme-${theme}`}>
+      <AppBar elevation={1} position="static">
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <FlexBox sx={{ alignItems: 'center' }}>
+            <Button color="info">{title}</Button>
+          </FlexBox>
+          <FlexBox>
+            <FlexBox
+              sx={{
+                alignItems: 'center',
+              }}
+            >
+              {Object.values(routes)
+                .filter((route) => route.title)
+                .map(({ path, title }, index) => (
+                  <>
+                    <Button
+                      key={path}
+                      component={Link}
+                      to={path as string}
+                      onClick={sidebarActions.close}
+                    >
+                      <Typography>{title}</Typography>
+                    </Button>
+                    {index === Object.values(routes).length - 1 ? null : (
+                      <Divider orientation="vertical" flexItem />
+                    )}
+                  </>
+                ))}
+            </FlexBox>
+            <Divider orientation="vertical" flexItem />
+            <Tooltip title="Switch theme" arrow>
+              <IconButton
+                color="info"
+                edge="end"
+                size="large"
+                onClick={() => alert('To schedule')}
+                data-pw="theme-toggle"
+              >
+                <EditCalendarOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+          </FlexBox>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};

@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom';
-
-import DefaultIcon from '@mui/icons-material/Deblur';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
@@ -27,10 +24,9 @@ function Sidebar() {
       <List sx={{ width: 250, pt: (theme) => `${theme.mixins.toolbar.minHeight}px` }}>
         {Object.values(routes)
           .filter((route) => route.title)
-          .map(({ path, title, icon: Icon }) => (
+          .map(({ path, title }) => (
             <ListItem sx={{ p: 0 }} key={path}>
               <ListItemButton component={Link} to={path as string} onClick={sidebarActions.close}>
-                <ListItemIcon>{Icon ? <Icon /> : <DefaultIcon />}</ListItemIcon>
                 <ListItemText>{title}</ListItemText>
               </ListItemButton>
             </ListItem>

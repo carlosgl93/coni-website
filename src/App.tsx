@@ -11,20 +11,25 @@ import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 import Sidebar from '@/sections/Sidebar';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const client = new QueryClient();
+
   return (
-    <Fragment>
-      <CssBaseline />
-      <Notifications />
-      <HotKeys />
-      <SW />
-      <BrowserRouter>
-        <Header />
-        <Sidebar />
-        <Pages />
-      </BrowserRouter>
-    </Fragment>
+    <QueryClientProvider client={client}>
+      <Fragment>
+        <CssBaseline />
+        <Notifications />
+        <HotKeys />
+        <SW />
+        <BrowserRouter>
+          <Header />
+          <Sidebar />
+          <Pages />
+        </BrowserRouter>
+      </Fragment>
+    </QueryClientProvider>
   );
 }
 
