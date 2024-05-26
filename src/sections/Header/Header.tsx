@@ -47,14 +47,8 @@ const MobileHeader = () => {
           </FlexBox>
           <FlexBox>
             <Divider orientation="vertical" flexItem />
-            <Tooltip title="Switch theme" arrow>
-              <IconButton
-                color="info"
-                edge="end"
-                size="large"
-                onClick={() => alert('To schedule')}
-                data-pw="theme-toggle"
-              >
+            <Tooltip title="Agendar" arrow>
+              <IconButton color="info" edge="end" size="large" onClick={() => alert('To schedule')}>
                 <EditCalendarOutlinedIcon />
               </IconButton>
             </Tooltip>

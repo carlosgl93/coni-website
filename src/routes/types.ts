@@ -10,6 +10,9 @@ enum Pages {
   EmbarazoConsciente,
   PartoPositivo,
   SobreMi,
+  BackOffice,
+  Ingresar,
+  RegistrarPrestador,
   NotFound,
 }
 

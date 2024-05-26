@@ -33,6 +33,21 @@ const routes: Routes = {
     path: '/sobre-mi',
     title: 'Sobre Mi',
   },
+  [Pages.BackOffice]: {
+    component: asyncComponentLoader(() => import('@/pages/Backoffice')),
+    path: '/backoffice',
+    title: 'Backoffice',
+  },
+  [Pages.Ingresar]: {
+    component: asyncComponentLoader(() => import('@/pages/Ingresar')),
+    path: '/iniciar-sesion',
+    title: 'Iniciar Sesion',
+  },
+  [Pages.RegistrarPrestador]: {
+    component: asyncComponentLoader(() => import('@/pages/RegistrarPrestador')),
+    path: '/registrar',
+    title: 'Crear Cuenta',
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',

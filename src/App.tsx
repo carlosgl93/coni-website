@@ -1,34 +1,48 @@
-import { Fragment } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-
-import CssBaseline from '@mui/material/CssBaseline';
-
-import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
-import Pages from '@/routes/Pages';
-import Header from '@/sections/Header';
-import HotKeys from '@/sections/HotKeys';
+import { esES, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Notifications from '@/sections/Notifications';
-import SW from '@/sections/SW';
+import CssBaseline from '@mui/material/CssBaseline';
+import { withErrorHandler } from '@/error-handling';
+import { BrowserRouter } from 'react-router-dom';
+import HotKeys from '@/sections/HotKeys';
 import Sidebar from '@/sections/Sidebar';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Header from '@/sections/Header';
+import Pages from '@/routes/Pages';
+import { Fragment } from 'react';
+import SW from '@/sections/SW';
+import './styles.css';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  },
+});
 
 function App() {
-  const client = new QueryClient();
-
   return (
-    <QueryClientProvider client={client}>
-      <Fragment>
-        <CssBaseline />
-        <Notifications />
-        <HotKeys />
-        <SW />
-        <BrowserRouter>
-          <Header />
-          <Sidebar />
-          <Pages />
-        </BrowserRouter>
-      </Fragment>
+    <QueryClientProvider client={queryClient}>
+      <LocalizationProvider
+        dateAdapter={AdapterDayjs}
+        adapterLocale="es-mx"
+        localeText={esES.components.MuiLocalizationProvider.defaultProps.localeText}
+      >
+        <Fragment>
+          <CssBaseline />
+          <Notifications />
+          <HotKeys />
+          <SW />
+          <BrowserRouter>
+            <Header />
+            <Sidebar />
+            <Pages />
+          </BrowserRouter>
+        </Fragment>
+      </LocalizationProvider>
     </QueryClientProvider>
   );
 }

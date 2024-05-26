@@ -23,7 +23,15 @@ function Sidebar() {
     >
       <List sx={{ width: 250, pt: (theme) => `${theme.mixins.toolbar.minHeight}px` }}>
         {Object.values(routes)
-          .filter((route) => route.title)
+          .filter((route) => {
+            if (
+              route.path === '/iniciar-sesion' ||
+              route.path === '/registrar' ||
+              route.path === '/backoffice'
+            )
+              return false;
+            return route.title;
+          })
           .map(({ path, title }) => (
             <ListItem sx={{ p: 0 }} key={path}>
               <ListItemButton component={Link} to={path as string} onClick={sidebarActions.close}>
