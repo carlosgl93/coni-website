@@ -1,13 +1,11 @@
 import isMobile from '@/utils/is-mobile';
 
 import type { Notifications } from './types';
+import { getEnvVariable } from './envVariables';
 
 const title = import.meta.env.VITE_TITLE;
-
 const email = import.meta.env.VITE_EMAIL;
-
 const repository = import.meta.env.VITE_REPOSITORY;
-
 const messages = {
   app: {
     crash: {
@@ -47,8 +45,9 @@ const loader = {
 };
 
 const defaultMetaTags = {
-  image: '/cover.png',
-  description: 'Starter kit for modern web applications',
+  image: '/profile-image.png',
+  description:
+    'Constanza Sepulveda: Educadora, Tarotista, Doula. Acompañamiento en el camino de la maternidad y la crianza consciente.',
 };
 const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
@@ -62,4 +61,5 @@ export {
   title,
   defaultMetaTags,
   giphy404,
+  getEnvVariable,
 };
