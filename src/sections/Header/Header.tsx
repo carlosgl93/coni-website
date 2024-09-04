@@ -12,9 +12,10 @@ import { FlexBox } from '@/components/styled';
 import { title } from '@/config';
 import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
-import { Dialog, DialogContent, DialogTitle, Typography } from '@mui/material';
+import { Dialog, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 // import useOrientation from '@/hooks/useOrientation';
+import { ScheduleModal } from '../../components/Schedule/ScheduleModal';
 import { ScheduleController } from '@/controllers/schedule';
 
 function Header() {
@@ -29,7 +30,7 @@ export default Header;
 const MobileHeader = () => {
   const [, sidebarActions] = useSidebar();
   const [theme] = useTheme();
-  const { isOpen, toggleModal } = ScheduleController();
+  const { toggleScheduler } = ScheduleController();
 
   return (
     <Box sx={{ flexGrow: 1 }} data-pw={`theme-${theme}`}>
@@ -51,35 +52,14 @@ const MobileHeader = () => {
           <FlexBox>
             <Divider orientation="vertical" flexItem />
             <Tooltip title="Agendar" arrow>
-              <IconButton color="info" edge="end" size="large" onClick={toggleModal}>
+              <IconButton color="info" edge="end" size="large" onClick={toggleScheduler}>
                 <EditCalendarOutlinedIcon />
               </IconButton>
             </Tooltip>
           </FlexBox>
         </Toolbar>
       </AppBar>
-      <Dialog
-        open={isOpen}
-        onClose={toggleModal}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <DialogTitle>Agendar</DialogTitle>
-        <DialogContent>
-          <form action="">
-            <select>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <ScheduleModal />
     </Box>
   );
 };
@@ -87,7 +67,7 @@ const MobileHeader = () => {
 export const DesktopHeader = () => {
   const [, sidebarActions] = useSidebar();
   const [theme] = useTheme();
-  const { isOpen, toggleModal } = ScheduleController();
+  const { toggleScheduler, open } = ScheduleController();
 
   return (
     <Box sx={{ flexGrow: 1 }} data-pw={`theme-${theme}`}>
@@ -135,7 +115,7 @@ export const DesktopHeader = () => {
           </FlexBox>
         </Toolbar>
       </AppBar>
-      <Dialog onClose={toggleModal} open={isOpen}></Dialog>
+      <Dialog onClose={toggleScheduler} open={open}></Dialog>
     </Box>
   );
 };
