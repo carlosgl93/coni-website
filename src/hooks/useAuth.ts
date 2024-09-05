@@ -16,7 +16,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { notificationState } from '@/store/snackbar';
 import { FirebaseError } from 'firebase/app';
 import { Prestador, prestadorState } from '@/store/auth/prestador';
-import { defaultAvailability } from '@/utils/constants';
 import { AvailabilityData, editDisponibilidadState } from '@/store/availability';
 
 export type CreateAccountParams = {
@@ -96,10 +95,10 @@ export const useAuth = () => {
         return setDoc(providerRef, newPrestador).then(() => {
           const batch = writeBatch(db);
 
-          defaultAvailability.forEach((day) => {
-            const dayRef = doc(providerRef, 'availability', day.day);
-            batch.set(dayRef, day);
-          });
+          // defaultAvailability.forEach((day) => {
+          //   const dayRef = doc(providerRef, 'availability', day.day);
+          //   batch.set(dayRef, day);
+          // });
 
           return batch.commit().then(() => newPrestador);
         });

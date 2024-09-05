@@ -1,4 +1,8 @@
-import { Service, ServiceCategory, ServiceType } from '@/entities';
+import {
+  Service,
+  ServiceCategory,
+  ServiceType,
+} from '../../../functions/src/entities/models/service';
 
 export const createdServices: Array<Service> = [
   {

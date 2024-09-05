@@ -8,4 +8,5 @@ setGlobalOptions({
   maxInstances: 1,
   memory: '128MiB',
 });
+
 export const api = onRequest(app);
