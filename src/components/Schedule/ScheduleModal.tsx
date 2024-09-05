@@ -5,13 +5,20 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 export const ScheduleModal = () => {
   const { open, toggleScheduler, register, handleSubmit, onSubmit, isValid } = ScheduleController();
 
-  console.log(isValid);
-
   return (
     <Dialog open={open} onClose={toggleScheduler}>
       <DialogTitle>Agendar</DialogTitle>
       <DialogContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 4,
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <label htmlFor="selectService">Selecciona un servicio</label>
           <select
             {...register('serviceId', {

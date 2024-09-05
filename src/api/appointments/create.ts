@@ -5,7 +5,6 @@ import { paymentSettings } from '@/utils/config';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const notifyUrl = import.meta.env.VITE_NOTIFY_URL;
-console.log('base and notify urls', baseUrl, notifyUrl);
 
 export async function createAppointment(data: CreateAppointment) {
   const service = createdServices.find((service) => service.id === data.serviceId);
@@ -23,7 +22,7 @@ export async function createAppointment(data: CreateAppointment) {
       currency: paymentSettings.currency,
       payment: paymentSettings.paymentMethods,
       urlreturn: `${baseUrl}/payment?appointmentId=${newAppointment.data.id}`,
-      urlnotify: `${String(notifyUrl)}?appointmentId=${newAppointment.data.id}`,
+      urlnotify: `${String(notifyUrl)}/${newAppointment.data.id}`,
       // TODO CHANGE URL NOTIFY TO THE UPDATE APPOINTMENT HANDLER IN THE BACKEND
     });
     console.log(paykuRes.data);
